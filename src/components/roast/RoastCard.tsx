@@ -1,4 +1,4 @@
-import { BrutalCard, BrutalCardContent } from "@/components/ui/brutal-card";
+import { RetroUICard, RetroUICardContent } from "@/components/retroui/card";
 import { Link } from "react-router-dom";
 import { Eye, Skull, Calendar } from "lucide-react";
 
@@ -12,8 +12,8 @@ interface RoastCardProps {
 
 export function RoastCard({ id, startupName, date, score, preview }: RoastCardProps) {
   return (
-    <BrutalCard className="hover:translate-x-1 hover:translate-y-1 transition-transform">
-      <BrutalCardContent>
+    <RetroUICard className="hover:translate-x-1 hover:translate-y-1 transition-transform">
+      <RetroUICardContent>
         <div className="flex items-start justify-between mb-4">
           <div>
             <h3 className="font-bold text-lg">{startupName}</h3>
@@ -22,7 +22,7 @@ export function RoastCard({ id, startupName, date, score, preview }: RoastCardPr
               <span>{date}</span>
             </div>
           </div>
-          <div className="flex items-center gap-1 bg-secondary text-secondary-foreground px-3 py-1 border-4 border-foreground">
+          <div className="flex items-center gap-1 bg-secondary text-secondary-foreground px-3 py-1 border-2 border-foreground">
             <Skull className="h-4 w-4" />
             <span className="font-bold">{score}/10</span>
           </div>
@@ -34,12 +34,12 @@ export function RoastCard({ id, startupName, date, score, preview }: RoastCardPr
 
         <Link
           to={`/result?id=${id}`}
-          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 border-4 border-foreground font-bold text-sm hover:translate-x-1 hover:translate-y-1 transition-transform"
+          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 border-2 border-foreground font-bold text-sm hover:translate-x-1 hover:translate-y-1 transition-transform"
         >
           <Eye className="h-4 w-4" />
           View Roast
         </Link>
-      </BrutalCardContent>
-    </BrutalCard>
+      </RetroUICardContent>
+    </RetroUICard>
   );
 }

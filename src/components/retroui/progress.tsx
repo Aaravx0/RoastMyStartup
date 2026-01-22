@@ -1,13 +1,13 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-export interface BrutalProgressProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface RetroUIProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   value: number;
   max?: number;
   label?: string;
 }
 
-const BrutalProgress = React.forwardRef<HTMLDivElement, BrutalProgressProps>(
+const RetroUIProgress = React.forwardRef<HTMLDivElement, RetroUIProgressProps>(
   ({ className, value, max = 100, label, ...props }, ref) => {
     const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
 
@@ -19,9 +19,9 @@ const BrutalProgress = React.forwardRef<HTMLDivElement, BrutalProgressProps>(
             <span className="text-sm font-mono">{value}/{max}</span>
           </div>
         )}
-        <div className="h-6 w-full border-2 border-foreground bg-background">
+        <div className="h-6 w-full border-2 border-black bg-white retroui-shadow">
           <div
-            className="h-full bg-primary transition-all duration-300"
+            className="h-full bg-yellow-400 transition-all duration-300"
             style={{ width: `${percentage}%` }}
           />
         </div>
@@ -29,6 +29,6 @@ const BrutalProgress = React.forwardRef<HTMLDivElement, BrutalProgressProps>(
     );
   }
 );
-BrutalProgress.displayName = "BrutalProgress";
+RetroUIProgress.displayName = "RetroUIProgress";
 
-export { BrutalProgress };
+export { RetroUIProgress };

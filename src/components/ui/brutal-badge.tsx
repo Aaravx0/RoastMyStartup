@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const brutalBadgeVariants = cva(
-  "inline-flex items-center border-3 border-foreground px-3 py-1 text-sm font-bold",
+  "inline-flex items-center border-2 border-foreground px-3 py-1 text-sm font-bold",
   {
     variants: {
       variant: {

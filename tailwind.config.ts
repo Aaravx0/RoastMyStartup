@@ -17,6 +17,8 @@ export default {
         sans: ["Space Grotesk", "system-ui", "sans-serif"],
         display: ["Space Grotesk", "system-ui", "sans-serif"],
         mono: ["Space Mono", "monospace"],
+        heading: ["'Archivo Black'", "sans-serif"],
+        body: ["'Space Grotesk'", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

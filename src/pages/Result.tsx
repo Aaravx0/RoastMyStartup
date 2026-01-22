@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { PageLayout } from "@/components/layout/PageLayout";
-import { BrutalButton } from "@/components/ui/brutal-button";
-import { BrutalCard, BrutalCardContent } from "@/components/ui/brutal-card";
-import { BrutalProgress } from "@/components/ui/brutal-progress";
+import { RetroUIButton } from "@/components/retroui/button";
+import { RetroUICard, RetroUICardContent } from "@/components/retroui/card";
+import { RetroUIProgress } from "@/components/retroui/progress";
 import { ScoreMeter } from "@/components/roast/ScoreMeter";
 import { Share2, RotateCcw, Zap, Quote } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -101,15 +101,15 @@ export default function Result() {
         {/* Metrics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {metrics.map((metric) => (
-            <BrutalCard key={metric.label}>
-              <BrutalCardContent>
-                <BrutalProgress
+            <RetroUICard key={metric.label}>
+              <RetroUICardContent>
+                <RetroUIProgress
                   label={metric.label}
                   value={metric.value}
                   max={metric.max}
                 />
-              </BrutalCardContent>
-            </BrutalCard>
+              </RetroUICardContent>
+            </RetroUICard>
           ))}
         </div>
 
@@ -120,59 +120,59 @@ export default function Result() {
           </h2>
           <div className="space-y-6 max-w-3xl mx-auto">
             {savageQuotes.map((quote, index) => (
-              <BrutalCard
+              <RetroUICard
                 key={index}
                 rotate={index % 2 === 0 ? "1" : "-1"}
                 className="bg-muted"
               >
-                <BrutalCardContent className="flex gap-4">
+                <RetroUICardContent className="flex gap-4">
                   <Quote className="h-8 w-8 flex-shrink-0 text-primary" />
                   <p className="text-lg font-medium italic">"{quote}"</p>
-                </BrutalCardContent>
-              </BrutalCard>
+                </RetroUICardContent>
+              </RetroUICard>
             ))}
           </div>
         </div>
 
         {/* Summary Card */}
-        <BrutalCard className="max-w-3xl mx-auto mb-12 bg-primary">
-          <BrutalCardContent className="text-center py-8">
+        <RetroUICard className="max-w-3xl mx-auto mb-12 bg-primary">
+          <RetroUICardContent className="text-center py-8">
             <h3 className="text-2xl font-bold mb-4">The Verdict</h3>
             <p className="text-lg mb-6 whitespace-pre-wrap">
               {roastData.honest_feedback}
             </p>
-            <div className="inline-block bg-secondary text-secondary-foreground px-6 py-3 border-4 border-foreground font-bold">
+            <div className="inline-block bg-secondary text-secondary-foreground px-6 py-3 border-2 border-foreground font-bold">
               Survival Chance: {Math.round((roastScore / 10) * 100)}%
             </div>
-          </BrutalCardContent>
-        </BrutalCard>
+          </RetroUICardContent>
+        </RetroUICard>
 
         {/* Detailed Sections */}
         <div className="space-y-8 max-w-4xl mx-auto mb-12">
-          <BrutalCard>
-            <BrutalCardContent className="py-6">
+          <RetroUICard>
+            <RetroUICardContent className="py-6">
               <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
                 💀 Brutal Roast
               </h3>
               <p className="text-lg whitespace-pre-wrap">
                 {roastData.brutal_roast}
               </p>
-            </BrutalCardContent>
-          </BrutalCard>
+            </RetroUICardContent>
+          </RetroUICard>
 
-          <BrutalCard>
-            <BrutalCardContent className="py-6">
+          <RetroUICard>
+            <RetroUICardContent className="py-6">
               <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
                 🎯 Competitor Reality Check
               </h3>
               <p className="text-lg whitespace-pre-wrap">
                 {roastData.competitor_reality_check}
               </p>
-            </BrutalCardContent>
-          </BrutalCard>
+            </RetroUICardContent>
+          </RetroUICard>
 
-          <BrutalCard>
-            <BrutalCardContent className="py-6">
+          <RetroUICard>
+            <RetroUICardContent className="py-6">
               <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
                 🛟 Survival Tips
               </h3>
@@ -184,38 +184,38 @@ export default function Result() {
                   </li>
                 ))}
               </ul>
-            </BrutalCardContent>
-          </BrutalCard>
+            </RetroUICardContent>
+          </RetroUICard>
 
-          <BrutalCard>
-            <BrutalCardContent className="py-6">
+          <RetroUICard>
+            <RetroUICardContent className="py-6">
               <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
                 ✍️ Pitch Rewrite
               </h3>
               <p className="text-lg whitespace-pre-wrap">
                 {roastData.pitch_rewrite}
               </p>
-            </BrutalCardContent>
-          </BrutalCard>
+            </RetroUICardContent>
+          </RetroUICard>
         </div>
 
         {/* Actions */}
         <div className="flex flex-wrap justify-center gap-4">
-          <BrutalButton size="lg">
+          <RetroUIButton size="lg">
             <Share2 className="h-5 w-5 mr-2" />
             Share Results
-          </BrutalButton>
+          </RetroUIButton>
           <Link to="/roast">
-            <BrutalButton variant="outline" size="lg">
+            <RetroUIButton variant="outline" size="lg">
               <RotateCcw className="h-5 w-5 mr-2" />
               Try Again
-            </BrutalButton>
+            </RetroUIButton>
           </Link>
           <Link to="/pricing">
-            <BrutalButton variant="secondary" size="lg">
+            <RetroUIButton variant="secondary" size="lg">
               <Zap className="h-5 w-5 mr-2" />
               Upgrade for More
-            </BrutalButton>
+            </RetroUIButton>
           </Link>
         </div>
       </section>

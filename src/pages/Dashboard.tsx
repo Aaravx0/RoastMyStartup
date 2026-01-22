@@ -1,6 +1,6 @@
 import { DashboardSidebar } from "@/components/layout/DashboardSidebar";
 import { RoastCard } from "@/components/roast/RoastCard";
-import { BrutalBadge } from "@/components/ui/brutal-badge";
+import { RetroUIBadge } from "@/components/retroui/badge";
 import { Navbar } from "@/components/layout/Navbar";
 
 const mockRoasts = [
@@ -45,7 +45,7 @@ export default function Dashboard() {
           <div className="mb-8">
             <div className="flex items-center gap-4 mb-2">
               <h1 className="text-3xl font-bold">Roast History</h1>
-              <BrutalBadge>{mockRoasts.length} Roasts</BrutalBadge>
+              <RetroUIBadge>{mockRoasts.length} Roasts</RetroUIBadge>
             </div>
             <p className="text-muted-foreground">
               Your collection of brutal truths and emotional damage.
@@ -54,15 +54,15 @@ export default function Dashboard() {
 
           {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-            <div className="bg-primary p-6 border-4 border-foreground">
+            <div className="bg-primary p-6 border-2 border-foreground">
               <p className="text-sm font-bold opacity-80">Total Roasts</p>
               <p className="text-4xl font-bold">{mockRoasts.length}</p>
             </div>
-            <div className="bg-secondary text-secondary-foreground p-6 border-4 border-foreground">
+            <div className="bg-secondary text-secondary-foreground p-6 border-2 border-foreground">
               <p className="text-sm font-bold opacity-80">Avg Score</p>
               <p className="text-4xl font-bold">8.7</p>
             </div>
-            <div className="bg-muted p-6 border-4 border-foreground">
+            <div className="bg-muted p-6 border-2 border-foreground">
               <p className="text-sm font-bold opacity-80">Tears Shed</p>
               <p className="text-4xl font-bold">∞</p>
             </div>
@@ -77,7 +77,7 @@ export default function Dashboard() {
 
           {/* Empty State (hidden when there are roasts) */}
           {mockRoasts.length === 0 && (
-            <div className="text-center py-20 border-4 border-dashed border-muted-foreground">
+            <div className="text-center py-20 border-2 border-dashed border-muted-foreground">
               <p className="text-6xl mb-4">💀</p>
               <h3 className="text-xl font-bold mb-2">No roasts yet</h3>
               <p className="text-muted-foreground">

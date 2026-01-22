@@ -1,5 +1,5 @@
-import { BrutalCard, BrutalCardContent, BrutalCardHeader, BrutalCardTitle } from "@/components/ui/brutal-card";
-import { BrutalButton } from "@/components/ui/brutal-button";
+import { RetroUICard, RetroUICardContent, RetroUICardHeader, RetroUICardTitle } from "@/components/retroui/card";
+import { RetroUIButton } from "@/components/retroui/button";
 import { Check, X } from "lucide-react";
 
 interface PricingFeature {
@@ -29,24 +29,24 @@ export function PricingCard({
   onSelect,
 }: PricingCardProps) {
   return (
-    <BrutalCard
+    <RetroUICard
       className={`relative ${
         isPopular ? "bg-primary" : "bg-background"
       }`}
       rotate={isPopular ? "1" : "-1"}
     >
       {isPopular && (
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-secondary text-secondary-foreground px-4 py-1 border-4 border-foreground font-bold text-sm">
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-secondary text-secondary-foreground px-4 py-1 border-2 border-foreground font-bold text-sm">
           MOST POPULAR 💀
         </div>
       )}
 
-      <BrutalCardHeader>
-        <BrutalCardTitle className="text-3xl">{name}</BrutalCardTitle>
+      <RetroUICardHeader>
+        <RetroUICardTitle className="text-3xl">{name}</RetroUICardTitle>
         <p className="text-muted-foreground mt-2">{description}</p>
-      </BrutalCardHeader>
+      </RetroUICardHeader>
 
-      <BrutalCardContent>
+      <RetroUICardContent>
         <div className="mb-6">
           <span className="text-5xl font-bold">{price}</span>
           {price !== "Free" && (
@@ -73,15 +73,15 @@ export function PricingCard({
           ))}
         </ul>
 
-        <BrutalButton
+        <RetroUIButton
           className="w-full"
-          variant={isPopular ? "secondary" : "default"}
+          variant={isPopular ? "outline" : "default"}
           size="lg"
           onClick={onSelect}
         >
           {buttonText}
-        </BrutalButton>
-      </BrutalCardContent>
-    </BrutalCard>
+        </RetroUIButton>
+      </RetroUICardContent>
+    </RetroUICard>
   );
 }

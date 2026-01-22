@@ -15,12 +15,12 @@ export function DashboardSidebar() {
 
   return (
     <aside
-      className={`bg-background border-r-4 border-foreground flex flex-col transition-all duration-200 ${
+      className={`bg-background border-r-2 border-foreground flex flex-col transition-all duration-200 ${
         collapsed ? "w-16" : "w-64"
       }`}
     >
       {/* Logo */}
-      <div className="h-16 border-b-4 border-foreground flex items-center justify-between px-4">
+      <div className="h-16 border-b-2 border-foreground flex items-center justify-between px-4">
         {!collapsed && (
           <Link to="/" className="flex items-center gap-2 font-bold">
             <Flame className="h-6 w-6 text-primary fill-primary" />
@@ -64,13 +64,13 @@ export function DashboardSidebar() {
 
       {/* Upgrade Banner */}
       {!collapsed && (
-        <div className="p-4 border-t-4 border-foreground">
-          <div className="bg-primary p-4 border-4 border-foreground">
+        <div className="p-4 border-t-2 border-foreground">
+          <div className="bg-primary p-4 border-2 border-foreground">
             <p className="font-bold text-sm mb-2">Go Nuclear! 💀</p>
             <p className="text-xs mb-3">Unlock unlimited roasts</p>
             <Link
               to="/pricing"
-              className="block text-center bg-secondary text-secondary-foreground py-2 px-4 border-4 border-foreground font-bold text-sm hover:translate-x-1 hover:translate-y-1 transition-transform"
+              className="block text-center bg-secondary text-secondary-foreground py-2 px-4 border-2 border-foreground font-bold text-sm hover:translate-x-1 hover:translate-y-1 transition-transform"
             >
               UPGRADE
             </Link>

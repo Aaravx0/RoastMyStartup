@@ -1,12 +1,22 @@
 import { useState } from "react";
 import { PageLayout } from "@/components/layout/PageLayout";
-import { BrutalButton } from "@/components/ui/brutal-button";
-import { BrutalInput } from "@/components/ui/brutal-input";
-import { BrutalTextarea } from "@/components/ui/brutal-textarea";
-import { BrutalCard, BrutalCardContent, BrutalCardHeader, BrutalCardTitle } from "@/components/ui/brutal-card";
+import { RetroUIButton } from "@/components/retroui/button";
+import { RetroUIInput } from "@/components/retroui/input";
+import { RetroUITextarea } from "@/components/retroui/textarea";
+import { RetroUICard, RetroUICardContent, RetroUICardHeader, RetroUICardTitle } from "@/components/retroui/card";
 import { Download, Share2, ImageIcon, Flame, Skull, Heart, Lightbulb, PenLine, Target } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { generateRoast, type RoastResponse } from "@/lib/api";
+import { 
+  Drawer, 
+  DrawerClose, 
+  DrawerContent, 
+  DrawerDescription, 
+  DrawerFooter, 
+  DrawerHeader, 
+  DrawerTitle, 
+  DrawerTrigger 
+} from "@/components/ui/drawer";
 
 const roastLevels = [
   { id: "soft", name: "Soft", emoji: "🌶️", description: "Gentle feedback" },
@@ -36,9 +46,37 @@ export default function Roast() {
   const [roastData, setRoastData] = useState<RoastResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isFormValid, setIsFormValid] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Check if form is valid
+  const checkFormValidity = () => {
+    const isValid = formData.startupName.trim() !== "" && 
+                   formData.description.trim() !== "" && 
+                   formData.targetUsers.trim() !== "" && 
+                   formData.budget.trim() !== "";
+    setIsFormValid(isValid);
+    return isValid;
+  };
+
+  // Helper function to update form data and check validity
+  const updateFormData = (updates: Partial<typeof formData>) => {
+    const newFormData = { ...formData, ...updates };
+    setFormData(newFormData);
+    
+    // Check validity with new data
+    const isValid = newFormData.startupName.trim() !== "" && 
+                   newFormData.description.trim() !== "" && 
+                   newFormData.targetUsers.trim() !== "" && 
+                   newFormData.budget.trim() !== "";
+    setIsFormValid(isValid);
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    checkFormValidity();
+  };
+
+  const handleRoastGeneration = async () => {
     setLoading(true);
     setError(null);
 
@@ -108,7 +146,7 @@ export default function Roast() {
         {roastData.survival_tips.map((tip, index) => (
           <div
             key={index}
-            className="bg-background border-4 border-foreground p-4"
+            className="bg-background border-2 border-foreground p-4"
           >
             <p className="text-primary text-sm leading-relaxed">
               {index + 1}. {tip}
@@ -167,22 +205,22 @@ export default function Roast() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Form Panel */}
-          <BrutalCard>
-            <BrutalCardHeader>
-              <BrutalCardTitle className="flex items-center gap-2">
+          <RetroUICard>
+            <RetroUICardHeader>
+              <RetroUICardTitle className="flex items-center gap-2">
                 <Flame className="h-6 w-6" />
                 Your Startup Details
-              </BrutalCardTitle>
-            </BrutalCardHeader>
-            <BrutalCardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              </RetroUICardTitle>
+            </RetroUICardHeader>
+            <RetroUICardContent>
+              <form onSubmit={handleFormSubmit} className="space-y-6">
                 <div>
                   <label className="block font-bold mb-2">Startup Name</label>
-                  <BrutalInput
+                  <RetroUIInput
                     placeholder="e.g., UberForDogs"
                     value={formData.startupName}
                     onChange={(e) =>
-                      setFormData({ ...formData, startupName: e.target.value })
+                      updateFormData({ startupName: e.target.value })
                     }
                   />
                 </div>
@@ -191,11 +229,11 @@ export default function Roast() {
                   <label className="block font-bold mb-2">
                     Idea Description
                   </label>
-                  <BrutalTextarea
+                  <RetroUITextarea
                     placeholder="Describe your billion-dollar idea..."
                     value={formData.description}
                     onChange={(e) =>
-                      setFormData({ ...formData, description: e.target.value })
+                      updateFormData({ description: e.target.value })
                     }
                     rows={4}
                   />
@@ -203,22 +241,22 @@ export default function Roast() {
 
                 <div>
                   <label className="block font-bold mb-2">Target Users</label>
-                  <BrutalInput
+                  <RetroUIInput
                     placeholder="e.g., Busy professionals aged 25-40"
                     value={formData.targetUsers}
                     onChange={(e) =>
-                      setFormData({ ...formData, targetUsers: e.target.value })
+                      updateFormData({ targetUsers: e.target.value })
                     }
                   />
                 </div>
 
                 <div>
                   <label className="block font-bold mb-2">Budget</label>
-                  <BrutalInput
+                  <RetroUIInput
                     placeholder="e.g., $10,000"
                     value={formData.budget}
                     onChange={(e) =>
-                      setFormData({ ...formData, budget: e.target.value })
+                      updateFormData({ budget: e.target.value })
                     }
                   />
                 </div>
@@ -231,9 +269,9 @@ export default function Roast() {
                         key={level.id}
                         type="button"
                         onClick={() =>
-                          setFormData({ ...formData, roastLevel: level.id })
+                          updateFormData({ roastLevel: level.id })
                         }
-                        className={`p-4 border-4 border-foreground text-center transition-transform hover:translate-x-1 hover:translate-y-1 ${
+                        className={`p-4 border-2 border-foreground text-center transition-transform hover:translate-x-1 hover:translate-y-1 ${
                           formData.roastLevel === level.id
                             ? "bg-primary"
                             : "bg-background"
@@ -248,21 +286,66 @@ export default function Roast() {
                   </div>
                 </div>
 
-                <BrutalButton type="submit" size="lg" className="w-full" disabled={loading}>
-                  {loading ? "ROASTING..." : "ROAST ME 😈"}
-                </BrutalButton>
+                <Drawer>
+                  <DrawerTrigger asChild>
+                    <RetroUIButton 
+                      type="submit" 
+                      size="lg" 
+                      className="w-full" 
+                      disabled={loading || !isFormValid}
+                    >
+                      {loading ? "ROASTING..." : "ROAST ME 😈"}
+                    </RetroUIButton>
+                  </DrawerTrigger>
+                  <DrawerContent className="border-2 border-foreground [&>div:first-child]:hidden">
+                    {/* Custom handle - black, centered, properly positioned */}
+                    <div className="mx-auto mt-4 h-1 w-[100px] rounded-full bg-foreground" />
+                    
+                    <DrawerHeader className="text-center px-6 py-8">
+                      <DrawerTitle className="text-2xl font-bold mb-6 text-center">
+                        ⚠️ Are you absolutely sure?
+                      </DrawerTitle>
+                      <DrawerDescription className="text-lg mb-4 max-w-md mx-auto text-center text-justify">
+                        You're about to receive unfiltered, brutally honest feedback on your startup. 
+                        This is not validation. This is not encouragement. Some lines may sting. 
+                        Some may hurt a lot.
+                      </DrawerDescription>
+                      <p className="text-sm text-muted-foreground text-center">
+                        Once you proceed, there's no undo. Screenshots last forever.
+                      </p>
+                    </DrawerHeader>
+                    <DrawerFooter className="px-6 pb-8">
+                      <div className="flex gap-4 justify-center items-center">
+                        <DrawerClose asChild>
+                          <RetroUIButton 
+                            onClick={handleRoastGeneration}
+                            size="lg"
+                            disabled={loading}
+                          >
+                            🔥 Roast Me Anyway
+                          </RetroUIButton>
+                        </DrawerClose>
+                        <DrawerClose asChild>
+                          <RetroUIButton variant="outline" size="lg">
+                            😌 I'm Not Ready Yet
+                          </RetroUIButton>
+                        </DrawerClose>
+                      </div>
+                    </DrawerFooter>
+                  </DrawerContent>
+                </Drawer>
                 {error && (
-                  <div className="bg-destructive/10 border-4 border-destructive p-4 text-destructive font-bold">
+                  <div className="bg-destructive/10 border-2 border-destructive p-4 text-destructive font-bold">
                     {error}
                   </div>
                 )}
               </form>
-            </BrutalCardContent>
-          </BrutalCard>
+            </RetroUICardContent>
+          </RetroUICard>
 
           {/* Output Panel */}
-          <BrutalCard className="bg-muted">
-            <BrutalCardHeader>
+          <RetroUICard className="bg-muted">
+            <RetroUICardHeader>
               <div className="flex flex-wrap gap-2">
                 {tabs.map((tab) => {
                   const Icon = tab.icon;
@@ -270,7 +353,7 @@ export default function Roast() {
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
-                      className={`flex items-center gap-2 px-4 py-2 border-4 border-foreground font-bold text-sm transition-transform ${
+                      className={`flex items-center gap-2 px-4 py-2 border-2 border-foreground font-bold text-sm transition-transform ${
                         activeTab === tab.id
                           ? "bg-primary"
                           : "bg-background hover:translate-x-0.5 hover:translate-y-0.5"
@@ -282,8 +365,8 @@ export default function Roast() {
                   );
                 })}
               </div>
-            </BrutalCardHeader>
-            <BrutalCardContent>
+            </RetroUICardHeader>
+            <RetroUICardContent>
               <div className="terminal-box min-h-[300px]">
                 {loading ? (
                   <div className="flex items-center justify-center h-[300px] text-muted-foreground">
@@ -308,34 +391,34 @@ export default function Roast() {
 
               {/* Action Buttons */}
               <div className="flex flex-wrap gap-4 mt-6">
-                <BrutalButton variant="outline" size="sm" disabled={!roastData}>
+                <RetroUIButton variant="outline" size="sm" disabled={!roastData}>
                   <ImageIcon className="h-4 w-4 mr-2" />
                   Generate Meme
-                </BrutalButton>
-                <BrutalButton variant="outline" size="sm" disabled={!roastData}>
+                </RetroUIButton>
+                <RetroUIButton variant="outline" size="sm" disabled={!roastData}>
                   <Download className="h-4 w-4 mr-2" />
                   Download PDF
-                </BrutalButton>
-                <BrutalButton variant="outline" size="sm" disabled={!roastData}>
+                </RetroUIButton>
+                <RetroUIButton variant="outline" size="sm" disabled={!roastData}>
                   <Share2 className="h-4 w-4 mr-2" />
                   Share
-                </BrutalButton>
+                </RetroUIButton>
               </div>
 
               {roastData && (
-                <div className="mt-6 pt-6 border-t-4 border-foreground">
-                  <BrutalButton
+                <div className="mt-6 pt-6 border-t-2 border-foreground">
+                  <RetroUIButton
                     className="w-full"
                     onClick={() =>
                       navigate("/result", { state: { roast: roastData } })
                     }
                   >
                     View Analysis Dashboard
-                  </BrutalButton>
+                  </RetroUIButton>
                 </div>
               )}
-            </BrutalCardContent>
-          </BrutalCard>
+            </RetroUICardContent>
+          </RetroUICard>
         </div>
       </section>
     </PageLayout>

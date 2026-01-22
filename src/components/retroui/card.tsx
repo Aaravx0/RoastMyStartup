@@ -1,11 +1,11 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-export interface BrutalCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface RetroUICardProps extends React.HTMLAttributes<HTMLDivElement> {
   rotate?: "none" | "1" | "-1" | "2" | "-2";
 }
 
-const BrutalCard = React.forwardRef<HTMLDivElement, BrutalCardProps>(
+const RetroUICard = React.forwardRef<HTMLDivElement, RetroUICardProps>(
   ({ className, rotate = "none", ...props }, ref) => {
     const rotateClass = {
       none: "",
@@ -19,7 +19,7 @@ const BrutalCard = React.forwardRef<HTMLDivElement, BrutalCardProps>(
       <div
         ref={ref}
         className={cn(
-          "bg-card text-card-foreground border-2 border-foreground p-6",
+          "bg-white text-black border-2 border-black p-6 retroui-shadow",
           rotateClass,
           className
         )}
@@ -28,61 +28,61 @@ const BrutalCard = React.forwardRef<HTMLDivElement, BrutalCardProps>(
     );
   }
 );
-BrutalCard.displayName = "BrutalCard";
+RetroUICard.displayName = "RetroUICard";
 
-const BrutalCardHeader = React.forwardRef<
+const RetroUICardHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div ref={ref} className={cn("mb-4", className)} {...props} />
 ));
-BrutalCardHeader.displayName = "BrutalCardHeader";
+RetroUICardHeader.displayName = "RetroUICardHeader";
 
-const BrutalCardTitle = React.forwardRef<
+const RetroUICardTitle = React.forwardRef<
   HTMLHeadingElement,
   React.HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => (
   <h3
     ref={ref}
-    className={cn("text-2xl font-bold leading-none tracking-tight", className)}
+    className={cn("text-2xl font-heading font-bold leading-none tracking-tight", className)}
     {...props}
   />
 ));
-BrutalCardTitle.displayName = "BrutalCardTitle";
+RetroUICardTitle.displayName = "RetroUICardTitle";
 
-const BrutalCardDescription = React.forwardRef<
+const RetroUICardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-muted-foreground mt-2", className)}
+    className={cn("text-gray-600 mt-2", className)}
     {...props}
   />
 ));
-BrutalCardDescription.displayName = "BrutalCardDescription";
+RetroUICardDescription.displayName = "RetroUICardDescription";
 
-const BrutalCardContent = React.forwardRef<
+const RetroUICardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div ref={ref} className={cn("", className)} {...props} />
 ));
-BrutalCardContent.displayName = "BrutalCardContent";
+RetroUICardContent.displayName = "RetroUICardContent";
 
-const BrutalCardFooter = React.forwardRef<
+const RetroUICardFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div ref={ref} className={cn("mt-4 flex items-center", className)} {...props} />
 ));
-BrutalCardFooter.displayName = "BrutalCardFooter";
+RetroUICardFooter.displayName = "RetroUICardFooter";
 
 export {
-  BrutalCard,
-  BrutalCardHeader,
-  BrutalCardTitle,
-  BrutalCardDescription,
-  BrutalCardContent,
-  BrutalCardFooter,
+  RetroUICard,
+  RetroUICardHeader,
+  RetroUICardTitle,
+  RetroUICardDescription,
+  RetroUICardContent,
+  RetroUICardFooter,
 };

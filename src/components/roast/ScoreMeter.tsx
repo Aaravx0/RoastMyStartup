@@ -17,7 +17,7 @@ export function ScoreMeter({ score, maxScore = 10 }: ScoreMeterProps) {
 
   return (
     <div className="text-center">
-      <div className="inline-flex items-center gap-3 bg-secondary text-secondary-foreground px-8 py-4 border-4 border-foreground mb-4">
+      <div className="inline-flex items-center gap-3 bg-secondary text-secondary-foreground px-8 py-4 border-2 border-foreground mb-4">
         <Skull className="h-10 w-10" />
         <div className="text-left">
           <p className="text-sm font-bold opacity-80">ROAST SCORE</p>
@@ -29,11 +29,11 @@ export function ScoreMeter({ score, maxScore = 10 }: ScoreMeterProps) {
 
       {/* Visual meter */}
       <div className="w-full max-w-md mx-auto">
-        <div className="h-8 w-full border-4 border-foreground bg-background flex">
+        <div className="h-8 w-full border-2 border-foreground bg-background flex">
           {Array.from({ length: 10 }).map((_, i) => (
             <div
               key={i}
-              className={`flex-1 border-r-2 last:border-r-0 border-foreground transition-colors ${
+              className={`flex-1 border-r border-foreground last:border-r-0 transition-colors ${
                 i < score ? getScoreColor() : "bg-background"
               }`}
             />

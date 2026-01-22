@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,8 +8,6 @@
    Pure white, yellow, black, red accent
    Thick borders, no shadows, flat design
 */
-
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
 @layer base {
   :root {
@@ -46,9 +46,13 @@
     --radius: 0px;
 
     /* Custom tokens */
-    --border-thick: 4px;
-    --border-medium: 3px;
+    --border-thick: 2px;
+    --border-medium: 2px;
     --hover-shift: 4px;
+
+    /* RetroUI Theme Variables */
+    --shadow-x: 6px;
+    --shadow-y: 6px;
 
     /* Sidebar */
     --sidebar-background: 0 0% 100%;
@@ -79,11 +83,11 @@
 @layer components {
   /* Brutalist border utilities */
   .brutal-border {
-    @apply border-[4px] border-black;
+    @apply border-2 border-black;
   }
 
   .brutal-border-thin {
-    @apply border-[3px] border-black;
+    @apply border-2 border-black;
   }
 
   /* Brutalist hover effect - position shift */
@@ -101,12 +105,29 @@
 
   /* Terminal/code style box */
   .terminal-box {
-    @apply bg-black text-white font-mono p-6 brutal-border;
+    @apply bg-black text-white font-mono p-6 border-2 border-black;
   }
 
   /* Section container */
   .section-container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* RetroUI Components */
+  .retroui-shadow {
+    box-shadow: var(--shadow-x) var(--shadow-y) 0 #000;
+  }
+
+  .retroui-shadow-yellow {
+    box-shadow: var(--shadow-x) var(--shadow-y) 0 #eab308;
+  }
+
+  .retroui-border {
+    @apply border-2 border-black rounded-none;
+  }
+
+  .retroui-border-thick {
+    @apply border-[3px] border-black rounded-none;
   }
 }
 

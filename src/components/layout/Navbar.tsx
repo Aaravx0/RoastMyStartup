@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { BrutalButton } from "@/components/ui/brutal-button";
+import { RetroUIButton } from "@/components/retroui";
 import { Flame, Menu, X } from "lucide-react";
 import { useState } from "react";
 
@@ -15,12 +15,12 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-background border-b-4 border-foreground sticky top-0 z-50">
+    <nav className="bg-white border-b-2 border-black sticky top-0 z-50">
       <div className="section-container">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 font-bold text-xl">
-            <Flame className="h-8 w-8 text-primary fill-primary" />
+            <Flame className="h-8 w-8 text-yellow-400 fill-yellow-400" />
             <span className="hidden sm:inline">RoastMyStartup</span>
           </Link>
 
@@ -32,8 +32,8 @@ export function Navbar() {
                 to={link.href}
                 className={`px-4 py-2 font-bold transition-colors ${
                   location.pathname === link.href
-                    ? "bg-primary text-primary-foreground"
-                    : "hover:bg-muted"
+                    ? "bg-yellow-400 text-black"
+                    : "hover:bg-gray-100"
                 }`}
               >
                 {link.label}
@@ -44,15 +44,15 @@ export function Navbar() {
           {/* CTA Button */}
           <div className="hidden md:block">
             <Link to="/roast">
-              <BrutalButton size="sm">
+              <RetroUIButton size="sm">
                 ROAST ME 🔥
-              </BrutalButton>
+              </RetroUIButton>
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 border-4 border-foreground"
+            className="md:hidden p-2 border-2 border-black retroui-shadow"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -62,16 +62,16 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t-4 border-foreground bg-background">
+        <div className="md:hidden border-t-2 border-black bg-white">
           <div className="flex flex-col">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`px-4 py-4 font-bold border-b-4 border-foreground ${
+                className={`px-4 py-4 font-bold border-b-2 border-black ${
                   location.pathname === link.href
-                    ? "bg-primary text-primary-foreground"
+                    ? "bg-yellow-400 text-black"
                     : ""
                 }`}
               >
@@ -80,9 +80,9 @@ export function Navbar() {
             ))}
             <div className="p-4">
               <Link to="/roast" onClick={() => setMobileMenuOpen(false)}>
-                <BrutalButton className="w-full">
+                <RetroUIButton className="w-full">
                   ROAST ME 🔥
-                </BrutalButton>
+                </RetroUIButton>
               </Link>
             </div>
           </div>
