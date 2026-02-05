@@ -2,8 +2,14 @@ import { Link } from "react-router-dom";
 import { RetroUIButton } from "@/components/retroui/button";
 import { RetroUIInput } from "@/components/retroui/input";
 import { RetroUICard, RetroUICardContent, RetroUICardHeader, RetroUICardTitle } from "@/components/retroui/card";
+import { OAUTH_ENDPOINTS } from "@/lib/api";
 
 const Signup = () => {
+  const handleGoogleSignup = () => {
+    // Redirect to backend OAuth endpoint (same as login)
+    window.location.href = OAUTH_ENDPOINTS.googleLogin;
+  };
+
   return (
     <div className="min-h-screen bg-white flex items-center justify-center p-4">
       <div className="w-full max-w-md">
@@ -21,7 +27,7 @@ const Signup = () => {
                 <RetroUIButton
                   variant="outline"
                   className="w-full flex items-center justify-center gap-3"
-                  onClick={() => console.log("Google OAuth (UI only)")}
+                  onClick={handleGoogleSignup}
                 >
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path
