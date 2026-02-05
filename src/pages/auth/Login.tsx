@@ -1,11 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { RetroUIButton } from "@/components/retroui/button";
 import { RetroUIInput } from "@/components/retroui/input";
 import { RetroUICard, RetroUICardContent, RetroUICardHeader, RetroUICardTitle } from "@/components/retroui/card";
 import { OAUTH_ENDPOINTS } from "@/lib/api";
 
 const Login = () => {
+  const [searchParams] = useSearchParams();
+  
   const handleGoogleLogin = () => {
+    // Get redirect parameter if it exists
+    const redirect = searchParams.get("redirect");
+    
+    // Store redirect in sessionStorage so we can retrieve it after OAuth callback
+    if (redirect) {
+      sessionStorage.setItem("auth_redirect", redirect);
+    }
+    
     // Redirect to backend OAuth endpoint
     window.location.href = OAUTH_ENDPOINTS.googleLogin;
   };

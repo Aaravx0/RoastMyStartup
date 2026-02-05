@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { RetroUICard, RetroUICardContent, RetroUICardHeader, RetroUICardTitle } from "@/components/retroui/card";
+import { getRedirectPath } from "@/lib/navigation";
 
 const Callback = () => {
   const [searchParams] = useSearchParams();
@@ -56,9 +57,19 @@ const Callback = () => {
 
           setStatus("success");
 
-          // Redirect to dashboard/home after brief success message
+          // Check for stored redirect intent from sessionStorage
+          const storedRedirect = sessionStorage.getItem("auth_redirect");
+          if (storedRedirect) {
+            sessionStorage.removeItem("auth_redirect");
+          }
+          
+          // Get redirect path from URL, sessionStorage, or default to home
+          const urlRedirect = searchParams.get("redirect");
+          const redirectTo = urlRedirect || storedRedirect || "/";
+
+          // Redirect to intended destination after brief success message
           setTimeout(() => {
-            navigate("/");
+            navigate(redirectTo);
           }, 1500);
         } catch (err) {
           console.error("Error processing token:", err);

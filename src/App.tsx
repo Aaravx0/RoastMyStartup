@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import Roast from "./pages/Roast";
 import Result from "./pages/Result";
@@ -29,7 +30,11 @@ const App = () => (
         <ScrollToTopButton />
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/roast" element={<Roast />} />
+          <Route path="/roast" element={
+            <ProtectedRoute>
+              <Roast />
+            </ProtectedRoute>
+          } />
           <Route path="/result" element={<Result />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/dashboard" element={<Dashboard />} />
