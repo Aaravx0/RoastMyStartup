@@ -164,7 +164,7 @@ export default function About() {
             Your startup idea is probably not as good as you think. 
             Let us help you find out.
           </p>
-          <Link to="/roast">
+          <Link to="/auth/login">
             <RetroUIButton size="xl" className="text-base sm:text-lg md:text-xl h-14 sm:h-16">
               GET ROASTED NOW 🔥
             </RetroUIButton>
